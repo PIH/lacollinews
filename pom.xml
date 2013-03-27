@@ -22,9 +22,9 @@
 	</organization>
 
 	<scm>
-		<connection>scm:svn:https://svn.openmrs.org/openmrs-modules/lacollinews/trunk/</connection>
-		<developerConnection>scm:svn:https://svn.openmrs.org/openmrs-modules/lacollinews/trunk/</developerConnection>
-		<url>https://svn.openmrs.org/openmrs-modules/lacollinews/trunk/</url>
+		<connection>scm:git:git@github.com:PIH/lacollinews.git</connection>
+		<developerConnection>scm:git:git@github.com:PIH/lacollinews.git</developerConnection>
+		<url>scm:git:git@github.com:PIH/lacollinews.git</url>
 	</scm>
 
 	<modules>
