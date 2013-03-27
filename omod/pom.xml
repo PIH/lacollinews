@@ -23,12 +23,9 @@
 			<version>${project.parent.version}</version>
 		</dependency>
 		
-				
 		<dependency>
-
 			<groupId>org.openmrs.module</groupId>
 		    <artifactId>webservices.rest-omod-common</artifactId>
-												
 		</dependency>
 						
 		<!-- End OpenMRS modules -->
