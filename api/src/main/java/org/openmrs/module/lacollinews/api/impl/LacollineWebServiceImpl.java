@@ -68,7 +68,7 @@ public class LacollineWebServiceImpl extends BaseOpenmrsService implements Lacol
     public List<Patient> searchPatientByName(String name) {
         List<Patient> patientList = null;
         if(StringUtils.isNotBlank(name)){
-            patientList = Context.getPatientService().getPatients(name);
+            patientList = dao.searchPatient(name, LacollinewsProperties.getPrimaryIdentifier());
         }
         return patientList;
     }

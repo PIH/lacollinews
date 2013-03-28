@@ -13,14 +13,21 @@
  */
 package org.openmrs.module.lacollinews.api.db.hibernate;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Property;
+import org.hibernate.criterion.Restrictions;
 import org.openmrs.Patient;
 import org.openmrs.PatientIdentifierType;
+import org.openmrs.PatientIdentifier;
+import org.openmrs.api.db.hibernate.PatientSearchCriteria;
 import org.openmrs.module.lacollinews.api.db.LacollineWebServiceDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,9 +54,31 @@ public class HibernateLacollineWebServiceDAO implements LacollineWebServiceDAO {
 
     @Override
     public List<Patient> searchPatient(String query, PatientIdentifierType identifierType) {
-        Criteria criteria;
+        Criteria criteria =null;
+        if(identifierType!=null){
+            criteria = sessionFactory.getCurrentSession().createCriteria(PatientIdentifier.class);
+            criteria.setProjection(Projections.distinct(Property.forName("patient")));
+            criteria.add(Restrictions.eq("identifierType", identifierType));
+            criteria.add(Restrictions.isNotNull("identifier"));
+            Criteria patientCriteria = criteria.createCriteria("patient");
+            if (StringUtils.isNotBlank(query)) {
+                patientCriteria = buildCriteria(query, patientCriteria);
+            }
+            criteria = patientCriteria;
+        }else{
+            criteria = sessionFactory.getCurrentSession().createCriteria(Patient.class);
+            criteria = buildCriteria(query, criteria);
+        }
+        List<Patient> patients = new ArrayList<Patient>();
+        try{
+            patients =(List<Patient>) criteria.list();
+        }catch(Exception e){
+            log.error(e);
+        }
+        return patients;
+    }
 
-        //return (List<Patient>) criteria.list();
-        return null;
+    private Criteria buildCriteria(String query, Criteria criteria) {
+        return new PatientSearchCriteria(sessionFactory, criteria).prepareCriteria(query, null, new ArrayList<PatientIdentifierType>(), true, true);
     }
 }
