@@ -25,6 +25,7 @@
 		<connection>scm:git:git@github.com:PIH/lacollinews.git</connection>
 		<developerConnection>scm:git:git@github.com:PIH/lacollinews.git</developerConnection>
 		<url>scm:git:git@github.com:PIH/lacollinews.git</url>
+        <tag>HEAD</tag>
 	</scm>
 
 	<modules>
@@ -140,5 +141,18 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>openmrs-repo-modules</id>
+            <name>OpenMRS Modules</name>
+            <url>http://mavenrepo.openmrs.org/nexus/content/repositories/modules</url>
+        </repository>
+        <snapshotRepository>
+            <id>openmrs-repo-snapshots</id>
+            <name>OpenMRS Snapshots</name>
+            <url>http://mavenrepo.openmrs.org/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>

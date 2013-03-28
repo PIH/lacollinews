@@ -15,8 +15,13 @@ package org.openmrs.module.lacollinews.api.db.hibernate;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.openmrs.Patient;
+import org.openmrs.PatientIdentifierType;
 import org.openmrs.module.lacollinews.api.db.LacollineWebServiceDAO;
+
+import java.util.List;
 
 /**
  * It is a default implementation of  {@link LacollineWebServiceDAO}.
@@ -38,5 +43,13 @@ public class HibernateLacollineWebServiceDAO implements LacollineWebServiceDAO {
      */
     public SessionFactory getSessionFactory() {
 	    return sessionFactory;
+    }
+
+    @Override
+    public List<Patient> searchPatient(String query, PatientIdentifierType identifierType) {
+        Criteria criteria;
+
+        //return (List<Patient>) criteria.list();
+        return null;
     }
 }

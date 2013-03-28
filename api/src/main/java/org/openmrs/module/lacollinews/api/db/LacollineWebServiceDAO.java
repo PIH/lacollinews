@@ -13,6 +13,11 @@
  */
 package org.openmrs.module.lacollinews.api.db;
 
+import org.openmrs.Patient;
+import org.openmrs.PatientIdentifierType;
+
+import java.util.List;
+
 /**
  *  Database methods for {@link org.openmrs.module.lacollinews.api.LacollineWebService}.
  */
@@ -21,4 +26,6 @@ public interface LacollineWebServiceDAO {
 	/*
 	 * Add DAO methods here
 	 */
+
+    public List<Patient> searchPatient(String query, PatientIdentifierType identifierType);
 }
