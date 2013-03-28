@@ -13,11 +13,19 @@
  */
 package org.openmrs.module.lacollinews.api.impl;
 
+import org.apache.commons.lang.StringUtils;
+import org.openmrs.Patient;
+import org.openmrs.PatientIdentifierType;
+import org.openmrs.api.context.Context;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.module.lacollinews.LacollinewsProperties;
 import org.openmrs.module.lacollinews.api.LacollineWebService;
 import org.openmrs.module.lacollinews.api.db.LacollineWebServiceDAO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * It is a default implementation of {@link org.openmrs.module.lacollinews.api.LacollineWebService}.
@@ -40,5 +48,28 @@ public class LacollineWebServiceImpl extends BaseOpenmrsService implements Lacol
      */
     public LacollineWebServiceDAO getDao() {
 	    return dao;
+    }
+
+    @Override
+    public List<Patient> searchPatientById(String id) {
+        List<Patient> patientList = null;
+        if(StringUtils.isNotBlank(id)){
+            List<PatientIdentifierType> identifierTypes = new ArrayList<PatientIdentifierType>();
+            PatientIdentifierType preferredIdentifierType = LacollinewsProperties.getPrimaryIdentifier();
+            if(preferredIdentifierType!=null){
+                identifierTypes.add(preferredIdentifierType);
+                patientList = Context.getPatientService().getPatients(null, id, identifierTypes, true);
+            }
+        }
+        return patientList;
+    }
+
+    @Override
+    public List<Patient> searchPatientByName(String name) {
+        List<Patient> patientList = null;
+        if(StringUtils.isNotBlank(name)){
+            patientList = Context.getPatientService().getPatients(name);
+        }
+        return patientList;
     }
 }

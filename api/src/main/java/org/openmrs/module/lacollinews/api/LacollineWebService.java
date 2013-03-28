@@ -13,8 +13,11 @@
  */
 package org.openmrs.module.lacollinews.api;
 
+import org.openmrs.Patient;
 import org.openmrs.api.OpenmrsService;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * This service exposes module's core functionality. It is a Spring managed bean which is configured in moduleApplicationContext.xml.
@@ -33,4 +36,7 @@ public interface LacollineWebService extends OpenmrsService {
 	 * Add service methods here
 	 * 
 	 */
+    public List<Patient> searchPatientById(String id);
+
+    public List<Patient> searchPatientByName(String name);
 }

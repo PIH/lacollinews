@@ -17,6 +17,12 @@ import org.junit.Test;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.lacollinews.api.LacollineWebService;
 import org.openmrs.web.test.BaseModuleWebContextSensitiveTest;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.ServletWebRequest;
+
+import java.lang.Exception;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -27,4 +33,16 @@ public class LacollineWebServiceTest extends BaseModuleWebContextSensitiveTest {
 		assertNotNull(Context.getService(LacollineWebService.class));
 	}
 
+    @Test
+    public void shouldFindPatientByID() throws Exception{
+        //newRequest(RequestMethod.GET, requestURI, parameters);
+        MockHttpServletRequest request = new MockHttpServletRequest(RequestMethod.GET.toString(), "/rest/v1/patient/?id=2F14NR" );
+        request.addHeader("content-type", "application/json");
+
+        MockHttpServletResponse response = new MockHttpServletResponse();
+
+        ServletWebRequest webRequest = new ServletWebRequest(request, response);
+
+        assertNotNull(request);
+    }
 }

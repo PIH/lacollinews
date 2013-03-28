@@ -3,10 +3,11 @@
 <module configVersion="1.2">
 
 	<!-- Module Properties -->
-	<id>${project.parent.artifactId}</id>
-	<name>${project.parent.name}</name>
-	<version>${project.parent.version}</version>
-	<package>${project.parent.groupId}.${project.parent.artifactId}</package>
+    <id>@MODULE_ID@</id>
+    <name>@MODULE_NAME@</name>
+    <version>@MODULE_VERSION@</version>
+    <package>@MODULE_PACKAGE@</package>
+
 	<author>PIH</author>
 	<description>
 		${project.parent.description}
@@ -27,7 +28,7 @@
 	<!-- / Required Modules -->
 	
 	<!-- Module Activator -->
-	<activator>${project.parent.groupId}.${project.parent.artifactId}.WebServicesforLacollineActivator</activator>
+	<activator>@MODULE_PACKAGE@.WebServicesforLacollineActivator</activator>
 	
 	
 	<!-- Maps hibernate file's, if present -->
@@ -53,6 +54,16 @@
 		<file>messages_es.properties</file>
 	</messages>
 	<!-- /Internationalization -->
+
+    <!-- Required Global Properties -->
+    <globalProperty>
+        <property>@MODULE_ID@.primaryIdentifierType</property>
+        <defaultValue>a541af1e-105c-40bf-b345-ba1fd6a59b85</defaultValue>
+        <description>
+            Primary identifier type for looking up patients, generating barcodes, etc
+        </description>
+    </globalProperty>
+    <!-- /Required Global Properties -->
 
 </module>
 
