@@ -53,7 +53,7 @@ public class HibernateLacollineWebServiceDAO implements LacollineWebServiceDAO {
     }
 
     @Override
-    public List<Patient> searchPatient(String query, PatientIdentifierType identifierType) {
+    public List<Patient> searchPatient(String query, String gender, PatientIdentifierType identifierType) {
         Criteria criteria =null;
         if(identifierType!=null){
             criteria = sessionFactory.getCurrentSession().createCriteria(PatientIdentifier.class);
@@ -63,6 +63,9 @@ public class HibernateLacollineWebServiceDAO implements LacollineWebServiceDAO {
             Criteria patientCriteria = criteria.createCriteria("patient");
             if (StringUtils.isNotBlank(query)) {
                 patientCriteria = buildCriteria(query, patientCriteria);
+                if(StringUtils.isNotBlank(gender)){
+                    patientCriteria.add(Restrictions.eq("gender", gender));
+                }
             }
             criteria = patientCriteria;
         }else{

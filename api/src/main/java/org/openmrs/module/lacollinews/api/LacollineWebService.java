@@ -38,5 +38,5 @@ public interface LacollineWebService extends OpenmrsService {
 	 */
     public List<Patient> searchPatientById(String id);
 
-    public List<Patient> searchPatientByName(String name);
+    public List<Patient> searchPatientByName(String name, String gender);
 }

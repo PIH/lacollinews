@@ -47,10 +47,11 @@ public class RegisteredPatientSearchHandler implements SearchHandler {
         List<Patient> results = new ArrayList<Patient>();
         String id = requestContext.getParameter("id");
         String name = requestContext.getParameter("name");
+        String gender = requestContext.getParameter("gender");
         if(StringUtils.isNotBlank(id)){
             results = lacollineWebService.searchPatientById(id);
         }else if(StringUtils.isNotBlank(name)){
-            results = lacollineWebService.searchPatientByName(name);
+            results = lacollineWebService.searchPatientByName(name, gender);
         }
         return new NeedsPaging<Patient>(results, requestContext);
     }

@@ -27,5 +27,5 @@ public interface LacollineWebServiceDAO {
 	 * Add DAO methods here
 	 */
 
-    public List<Patient> searchPatient(String query, PatientIdentifierType identifierType);
+    public List<Patient> searchPatient(String query, String gender, PatientIdentifierType identifierType);
 }
