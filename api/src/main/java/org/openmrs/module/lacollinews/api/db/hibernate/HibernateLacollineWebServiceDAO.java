@@ -60,12 +60,13 @@ public class HibernateLacollineWebServiceDAO implements LacollineWebServiceDAO {
             criteria.setProjection(Projections.distinct(Property.forName("patient")));
             criteria.add(Restrictions.eq("identifierType", identifierType));
             criteria.add(Restrictions.isNotNull("identifier"));
+
             Criteria patientCriteria = criteria.createCriteria("patient");
+            if(StringUtils.isNotBlank(gender)){
+                patientCriteria.add(Restrictions.eq("gender", gender));
+            }
             if (StringUtils.isNotBlank(query)) {
                 patientCriteria = buildCriteria(query, patientCriteria);
-                if(StringUtils.isNotBlank(gender)){
-                    patientCriteria.add(Restrictions.eq("gender", gender));
-                }
             }
             criteria = patientCriteria;
         }else{
