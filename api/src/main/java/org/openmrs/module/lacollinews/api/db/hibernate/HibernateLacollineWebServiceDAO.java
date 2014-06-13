@@ -83,6 +83,6 @@ public class HibernateLacollineWebServiceDAO implements LacollineWebServiceDAO {
     }
 
     private Criteria buildCriteria(String query, Criteria criteria) {
-        return new PatientSearchCriteria(sessionFactory, criteria).prepareCriteria(query, null, new ArrayList<PatientIdentifierType>(), true, true);
+        return new PatientSearchCriteria(sessionFactory, criteria).prepareCriteria(query, null, new ArrayList<PatientIdentifierType>(), true, true, true);
     }
 }
